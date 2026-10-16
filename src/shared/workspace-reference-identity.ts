@@ -188,6 +188,10 @@ function externalUrl(item: WorkspaceAttachment): string | undefined {
       return identity.siteUrl && identifier
         ? `${identity.siteUrl.replace(/\/+$/, '')}/browse/${identifier}`
         : undefined
+    case 'gitea':
+      return identity.baseUrl && identity.owner && identity.repo
+        ? `${identity.baseUrl.replace(/\/+$/, '')}/${identity.owner}/${identity.repo}/${item.type === 'pr' ? 'pulls' : 'issues'}/${item.number}`
+        : undefined
     case 'linear':
       return undefined
   }
